@@ -14,6 +14,7 @@ import UserManagement from "./componentes/UserManagement";
 import RegisterForm from "./components/RegisterForm";
 //import EmailVerification from "./components/EmailVerification";
 import VerifyEmailPage from "./components/VerifyEmailPage";
+import { API_URL } from "./config";
 
 // Componente principal que usa las rutas
 function MainApp() {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./EmailVerification.css";
+import { API_URL } from "../config";
 
 const VerifyEmailPage = () => {
   const { token } = useParams();
