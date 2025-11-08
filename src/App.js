@@ -38,6 +38,9 @@ function MainApp() {
     weight: "",
     recipient_phone: "",
   });
+  const [loginError, setLoginError] = useState("");
+  const [users, setUsers] = useState([]);
+  const [showCreatePackage, setShowCreatePackage] = useState(false);
 
   // Estados de autenticación
   const [isLoggedIn, setIsLoggedIn] = useState(false);
