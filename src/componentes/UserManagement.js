@@ -31,7 +31,7 @@ function UserManagement() {
     e.preventDefault();
     setMessage("");
 
-    const { first_name, last_name, email, role } = formData;
+    const { first_name, email, role } = formData;
 
     if (!first_name || !email || !role) {
       setMessage("❌ Faltan campos obligatorios (nombre, correo, rol)");
@@ -63,9 +63,7 @@ function UserManagement() {
 
       {message && (
         <div
-          className={`message ${
-            message.includes("✅") ? "success" : "error"
-          }`}
+          className={`message ${message.includes("✅") ? "success" : "error"}`}
         >
           {message}
         </div>
@@ -92,9 +90,7 @@ function UserManagement() {
           type="email"
           placeholder="Correo electrónico"
           value={formData.email}
-          onChange={(e) =>
-            setFormData({ ...formData, email: e.target.value })
-          }
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
         <select
           value={formData.role}
