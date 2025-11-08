@@ -31,13 +31,13 @@ function MainApp() {
   // === NUEVOS ESTADOS PARA FASE 3 ===
   const [messengers, setMessengers] = useState([]);
   //const [showCreatePackage, setShowCreatePackage] = useState(false);
-  const [newPackage, setNewPackage] = useState({
+  /*const [newPackage, setNewPackage] = useState({
     sender_name: "",
     recipient_name: "",
     delivery_address: "",
     weight: "",
     recipient_phone: "",
-  });
+  });*/
   const [loginError, setLoginError] = useState("");
   const [users, setUsers] = useState([]);
   const [showCreatePackage, setShowCreatePackage] = useState(false);
