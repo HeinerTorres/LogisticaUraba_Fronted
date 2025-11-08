@@ -25,7 +25,7 @@ function MainApp() {
   //const [users, setUsers] = useState([]);
 
   const generateQR = (packageId) => {
-    window.open(`http://localhost:3001/api/packages/${packageId}/qr`, "_blank");
+    window.open(`${API_URL}/api/packages/${packageId}/qr`, "_blank");
   };
 
   // === NUEVOS ESTADOS PARA FASE 3 ===
@@ -110,18 +110,15 @@ function MainApp() {
     setMessage("");
 
     try {
-      const loginResponse = await fetch(
-        "http://localhost:3001/api/auth/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: loginData.email,
-            password: loginData.password,
-            session_id: sessionId,
-          }),
-        }
-      );
+      const loginResponse = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: loginData.email,
+          password: loginData.password,
+          session_id: sessionId,
+        }),
+      });
 
       const loginDataResult = await loginResponse.json();
       console.log("📡 Respuesta del login:", loginDataResult);
@@ -183,7 +180,7 @@ function MainApp() {
     try {
       console.log("🔐 Verificando token temporal...");
 
-      const verifyRes = await fetch("http://localhost:3001/api/verify-token", {
+      const verifyRes = await fetch(`${API_URL}/api/verify-token`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -203,18 +200,15 @@ function MainApp() {
 
       setMessage("✅ Código verificado. Iniciando sesión...");
 
-      const loginResponse = await fetch(
-        "http://localhost:3001/api/auth/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: loginData.email,
-            password: loginData.password,
-            session_id: newSessionId,
-          }),
-        }
-      );
+      const loginResponse = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: loginData.email,
+          password: loginData.password,
+          session_id: newSessionId,
+        }),
+      });
 
       const loginDataResult = await loginResponse.json();
 
@@ -283,7 +277,7 @@ function MainApp() {
   const handleLogout = async () => {
     try {
       if (currentUser?.email) {
-        await fetch("http://localhost:3001/api/auth/logout", {
+        await fetch(`${API_URL}/api/auth/logout`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -320,7 +314,7 @@ function MainApp() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:3001/api/packages/tracking/${trackingCode}`,
+        `${API_URL}/api/packages/tracking/${trackingCode}`,
         {
           headers: token ? { Authorization: `Bearer ${token}` } : {},
         }
@@ -344,7 +338,7 @@ function MainApp() {
   const getAllPackages = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:3001/api/packages", {
+      const response = await fetch(`${API_URL}/api/packages`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -360,7 +354,7 @@ function MainApp() {
   const getAllUsers = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:3001/api/users", {
+      const response = await fetch(`${API_URL}/api/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -378,7 +372,7 @@ function MainApp() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:3001/api/packages/messenger/my-deliveries",
+        `${API_URL}/api/packages/messenger/my-deliveries`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -397,7 +391,7 @@ function MainApp() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:3001/api/packages/client/my-packages",
+        `${API_URL}/api/packages/client/my-packages`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -418,7 +412,7 @@ function MainApp() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:3001/api/packages/${packageId}/assign-messenger`,
+        `${API_URL}/api/packages/${packageId}/assign-messenger`,
         {
           method: "PUT",
           headers: {
@@ -446,12 +440,9 @@ function MainApp() {
   const getMessengers = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(
-        "http://localhost:3001/api/users?role=messenger",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/users?role=messenger`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       const data = await response.json();
       setMessengers(data);
@@ -475,7 +466,7 @@ function MainApp() {
 
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:3001/api/packages/register",
+        `${API_URL}/api/packages/register`,
         {
           method: "POST",
           headers: {
@@ -517,7 +508,7 @@ function MainApp() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:3001/api/packages/${packageId}/status`,
+        `${API_URL}/api/packages/${packageId}/status`,
         {
           method: "PUT",
           headers: {
@@ -652,7 +643,7 @@ function MainApp() {
 
                     try {
                       const response = await fetch(
-                        "http://localhost:3001/api/send-token",
+                        `${API_URL}/api/send-token`,
                         {
                           method: "POST",
                           headers: { "Content-Type": "application/json" },

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./UserManagement.css";
+import { API_URL } from "../config";
 
 function UserManagement() {
   const [users, setUsers] = useState([]);
@@ -14,7 +15,7 @@ function UserManagement() {
   // Obtener usuarios existentes
   const fetchUsers = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/users");
+      const res = await fetch(`${API_URL}/api/users`);
       const data = await res.json();
       setUsers(data);
     } catch (error) {
@@ -39,7 +40,7 @@ function UserManagement() {
     }
 
     try {
-      const res = await fetch("http://localhost:3001/api/users/register", {
+      const res = await fetch(`${API_URL}/api/users/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

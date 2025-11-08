@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import '../App.css';
-import logoIcon from '../assets/logo_icon.png';
+import "../App.css";
+import logoIcon from "../assets/logo_icon.png";
+import { API_URL } from "../config";
 
-export default function RegisterForm(props) { // ✅ AGREGAR props como parámetro
+export default function RegisterForm(props) {
+  // ✅ AGREGAR props como parámetro
   const [form, setForm] = useState({
     first_name: "",
     second_name: "",
@@ -24,14 +26,14 @@ export default function RegisterForm(props) { // ✅ AGREGAR props como parámet
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3001/api/users/register", {
+      const response = await fetch(`${API_URL}/api/users/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         alert(`❌ Error: ${data.error || "No se pudo registrar el usuario"}`);
         return;
@@ -42,8 +44,12 @@ export default function RegisterForm(props) { // ✅ AGREGAR props como parámet
         props.onRegistrationSuccess(form.email); // ✅ CAMBIAR formData.email por form.email
       }
 
-      alert(`✅ Usuario registrado correctamente: ${data.user?.first_name || form.first_name}`);
-      
+      alert(
+        `✅ Usuario registrado correctamente: ${
+          data.user?.first_name || form.first_name
+        }`
+      );
+
       // Limpiar formulario
       setForm({
         first_name: "",
@@ -57,7 +63,6 @@ export default function RegisterForm(props) { // ✅ AGREGAR props como parámet
         role: "user",
         password: "",
       });
-      
     } catch (error) {
       console.error("Error de conexión:", error);
       alert("Error al conectar con el servidor.");
@@ -89,21 +94,21 @@ export default function RegisterForm(props) { // ✅ AGREGAR props como parámet
             <div className="form-row">
               <div className="form-group">
                 <label className="required">Primer Nombre</label>
-                <input 
-                  name="first_name" 
-                  placeholder="Ingrese su primer nombre" 
-                  value={form.first_name} 
-                  onChange={handleChange} 
-                  required 
+                <input
+                  name="first_name"
+                  placeholder="Ingrese su primer nombre"
+                  value={form.first_name}
+                  onChange={handleChange}
+                  required
                 />
               </div>
               <div className="form-group">
                 <label>Segundo Nombre</label>
-                <input 
-                  name="second_name" 
-                  placeholder="Ingrese su segundo nombre" 
-                  value={form.second_name} 
-                  onChange={handleChange} 
+                <input
+                  name="second_name"
+                  placeholder="Ingrese su segundo nombre"
+                  value={form.second_name}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -112,21 +117,21 @@ export default function RegisterForm(props) { // ✅ AGREGAR props como parámet
             <div className="form-row">
               <div className="form-group">
                 <label className="required">Primer Apellido</label>
-                <input 
-                  name="last_name" 
-                  placeholder="Ingrese su primer apellido" 
-                  value={form.last_name} 
-                  onChange={handleChange} 
-                  required 
+                <input
+                  name="last_name"
+                  placeholder="Ingrese su primer apellido"
+                  value={form.last_name}
+                  onChange={handleChange}
+                  required
                 />
               </div>
               <div className="form-group">
                 <label>Segundo Apellido</label>
-                <input 
-                  name="second_last_name" 
-                  placeholder="Ingrese su segundo apellido" 
-                  value={form.second_last_name} 
-                  onChange={handleChange} 
+                <input
+                  name="second_last_name"
+                  placeholder="Ingrese su segundo apellido"
+                  value={form.second_last_name}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -135,23 +140,23 @@ export default function RegisterForm(props) { // ✅ AGREGAR props como parámet
             <div className="form-row">
               <div className="form-group">
                 <label className="required">Número de Documento</label>
-                <input 
-                  name="document_number" 
-                  placeholder="Ingrese su documento" 
-                  value={form.document_number} 
-                  onChange={handleChange} 
-                  required 
+                <input
+                  name="document_number"
+                  placeholder="Ingrese su documento"
+                  value={form.document_number}
+                  onChange={handleChange}
+                  required
                 />
               </div>
               <div className="form-group">
                 <label className="required">Correo Electrónico</label>
-                <input 
-                  name="email" 
-                  type="email" 
-                  placeholder="ejemplo@correo.com" 
-                  value={form.email} 
-                  onChange={handleChange} 
-                  required 
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="ejemplo@correo.com"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
                 />
               </div>
             </div>
@@ -160,20 +165,20 @@ export default function RegisterForm(props) { // ✅ AGREGAR props como parámet
             <div className="form-row">
               <div className="form-group">
                 <label>Dirección</label>
-                <input 
-                  name="address" 
-                  placeholder="Ingrese su dirección" 
-                  value={form.address} 
-                  onChange={handleChange} 
+                <input
+                  name="address"
+                  placeholder="Ingrese su dirección"
+                  value={form.address}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group">
                 <label>Teléfono</label>
-                <input 
-                  name="phone" 
-                  placeholder="Ingrese su teléfono" 
-                  value={form.phone} 
-                  onChange={handleChange} 
+                <input
+                  name="phone"
+                  placeholder="Ingrese su teléfono"
+                  value={form.phone}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -190,13 +195,13 @@ export default function RegisterForm(props) { // ✅ AGREGAR props como parámet
               </div>
               <div className="form-group">
                 <label className="required">Contraseña</label>
-                <input 
-                  name="password" 
-                  type="password" 
-                  placeholder="Cree una contraseña segura" 
-                  value={form.password} 
-                  onChange={handleChange} 
-                  required 
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="Cree una contraseña segura"
+                  value={form.password}
+                  onChange={handleChange}
+                  required
                 />
               </div>
             </div>
@@ -208,9 +213,9 @@ export default function RegisterForm(props) { // ✅ AGREGAR props como parámet
 
           <div className="login-link">
             <p>¿Ya tienes una cuenta?</p>
-            <button 
+            <button
               className="btn-login-back"
-              onClick={() => window.location.href = '/login'}
+              onClick={() => (window.location.href = "/login")}
             >
               Iniciar Sesión
             </button>
